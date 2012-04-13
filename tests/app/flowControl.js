@@ -22,11 +22,15 @@ define([ 'use!underscore' ], function(_) {
 
         if (n % 5 == 0)
           return 'buzz';
-
+        else
+          return n;
       };
 
       // replace the following test with tests that prove your function works
       expect(fn(30)).to.be('fizzbuzz');
+      expect(fn(1)).to.be(1);
+      expect(fn(6)).to.be('fizz');
+      expect(fn(10)).to.be('buzz');
     });
 
     it("you should be able to work with logical operators", function() {
