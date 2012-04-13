@@ -11,6 +11,9 @@ define([ 'jquery', 'use!underscore' ], function($, _) {
 
       fn = function() {
         // write a function that makes the test pass
+        var def = new $.Deferred();
+        def.resolve(true);
+        return def;
       };
 
       fn().then(function(result) {
@@ -21,7 +24,7 @@ define([ 'jquery', 'use!underscore' ], function($, _) {
     });
 
     it("you should be able to receive data from the server and manipulate it", function(done) {
-      var peopleArray,
+      var peopleArray = [],
           url = '/data/testdata.json',
 
           tests = function() {
@@ -33,8 +36,14 @@ define([ 'jquery', 'use!underscore' ], function($, _) {
       // replace the call to the tests function below with code that calls the
       // tests function once the data has been a) retrieved from the server and
       // b) manipulated so the tests will pass.
-
-      tests();
+        $.getJSON(url, function(data) {
+          var people = data.people;
+          for (var i = 0; i < people.length; i++) {
+            peopleArray.push(people[i].name);
+          }
+          peopleArray.sort();
+          tests();
+        });    
     });
   });
 });

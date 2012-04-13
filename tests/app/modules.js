@@ -3,8 +3,11 @@ define([ 'use!underscore' ], function(_) {
     var fn = function() {};
 
     it("you should be able to create a function that returns a module", function() {
-      fn = function() {
+      fn = function(greeting, name) {
         // write a function that makes the tests pass
+        return {name: name,
+        greeting: greeting,
+        sayIt: function() { return this.greeting + ', ' + this.name}};
       };
 
       var module = fn('hello', 'matt');
